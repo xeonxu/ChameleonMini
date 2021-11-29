@@ -5,6 +5,8 @@
  *      Author: skuser
  */
 
+#ifdef CONFIG_MF_ULTRALIGHT_SUPPORT
+
 #ifndef MIFAREULTRALIGHT_H_
 #define MIFAREULTRALIGHT_H_
 
@@ -45,3 +47,5 @@ void MifareUltralightGetSak(uint8_t * Sak);
 void MifareUltralightSetSak(uint8_t Sak);
 
 #endif /* MIFAREULTRALIGHT_H_ */
+
+#endif /* Compilation support */
