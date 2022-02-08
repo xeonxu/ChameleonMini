@@ -687,6 +687,7 @@ uint16_t Reader14443AAppProcess(uint8_t *Buffer, uint16_t BitCount) {
             return rVal;
         }
 
+#ifdef CONFIG_MF_ULTRALIGHT_SUPPORT
         case Reader14443_Clone_MF_Ultralight:
         case Reader14443_Read_MF_Ultralight: {
             static uint8_t MFURead_CurrentAdress = 0;
@@ -757,6 +758,8 @@ uint16_t Reader14443AAppProcess(uint8_t *Buffer, uint16_t BitCount) {
             return rVal;
         }
 
+#endif // CONFIG_MF_ULTRALIGHT_SUPPORT
+
         /************************************
          * This function identifies a PICC. *
          ************************************/
@@ -817,11 +820,15 @@ uint16_t Reader14443AAppProcess(uint8_t *Buffer, uint16_t BitCount) {
                 if (CardCandidatesIdx == 1) {
                     int cfgid = -1;
                     switch (CardCandidates[0]) {
+#ifdef CONFIG_MF_ULTRALIGHT_SUPPORT
                         case CardType_NXP_MIFARE_Ultralight: {
                             cfgid = CONFIG_MF_ULTRALIGHT;
                             // TODO: enter MFU clone mdoe
                             break;
                         }
+
+#endif // CONFIG_MF_ULTRALIGHT_SUPPORT
+
                         case CardType_NXP_MIFARE_Classic_1k:
                         case CardType_Infineon_MIFARE_Classic_1k: {
                             if (CardCharacteristics.UIDSize == UIDSize_Single) {
